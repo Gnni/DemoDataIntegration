@@ -1,0 +1,210 @@
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+@(sensorOverview: model.datagen.config.Config)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="@routes.Assets.versioned("images/favicon.ico")">
+        <link href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("stylesheets/starter-template.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="@routes.Assets.versioned("stylesheets/main.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("stylesheets/jquery.bootstrap-touchspin.min.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("stylesheets/ie10-viewport-bug-workaround.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("stylesheets/dataTables.bootstrap.min.css")" rel="stylesheet">
+            <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Guennis Engines</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li id="start_stop_simulation">
+                                <input type="submit" value="Start Simulation" id="submitStartDatagen" class="btn btn-dark navbar-btn">
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button data-toggle="collapse" data-target="#sensor_config_section" class="btn btn-dark margin-right">Sensor Details</button>
+                        </li>
+                        <li>
+                            <button data-toggle="collapse" data-target="#analysis_section" class="btn btn-dark">Analysis Cockpit</button>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div id="main">
+            <div class="container-less-margin">
+                <div class="row top-buffer-small" style="display: flex">
+                    <div class="col-xs-3 col-md-1 center-block"></div>
+                    <div class="col-xs-10 col-md-4 center-block"><div id="erp_data"></div></div>
+                    <div class="col-xs-10 col-md-4 center-block"><div id="iot_data"></div></div>
+                    <div class="col-xs-3 col-md-1 center-block"></div>
+                </div>
+            </div>
+
+            <div id="analysis_section" class="collapse">
+                <div class="row text-align-center top-buffer-small bottom-buffer-small">
+                  <button type="button" id="sql1" class="btn btn-default">What are the avg temperature and noise<br />on the cutting machine for my<br />lastly manufactured engines?</button>
+                  <button type="button" id="sql2" class="btn btn-default">What are the avg vibrations<br /> at the assembly workplace<br />for the different kinds of steel?</button>
+                </div>
+                <div class="container-fluid top-buffer-tiny center-container" id="container_sql_res1_chart" style="display: none;">
+                <div class="row text-align-center top-buffer-tiny bottom-buffer-small" id="div_chart_sql_res1">
+                </div>
+                </div>
+                <div class="container-fluid top-buffer-tiny center-container" id="container_sql_res2_chart" style="display: none;">
+                    <div class="row text-align-center top-buffer-tiny bottom-buffer-small" id="div_chart_sql_res2">
+                    </div>
+                </div>
+                <div class="row text-align-center top-buffer-tiny bottom-buffer-small">
+                    <div class="col-xs-6 col-md-2 center-block"></div>
+                    <div class="col-xs-20 col-md-8 center-block table-wrap" id="sqlResultTableArea">
+                    </div>
+                    <div class="col-xs-3 col-md-1 center-block"></div>
+                </div>
+                <div class="row text-align-center top-buffer-small bottom-buffer-tiny">
+                    <div class="col-xs-6 col-md-2 center-block"></div>
+                    <div class="col-xs-20 col-md-8 center-block">
+                        <form method="post" action="@routes.SqlController.executeSql">
+                            <div class="form-group top-buffer-small">
+                                <label for="comment">Ask your question with SQL</label>
+                                <textarea class="form-control" rows="3" font-size="7pt" id="sqlStatement" name="sqlStatement">select * from "INDUSTRY"."PRODUCTION_ORDER_POSITION" limit 2
+                                </textarea>
+                            </div>
+                            <input type="submit" value="Ask!" id="submitSql" class="btn btn-dark">
+                        </form>
+
+                    </div>
+                    <div class="col-xs-3 col-md-1 center-block"></div>
+                </div>
+            </div>
+            <div id="sensor_config_section" class="collapse">
+            <div class="container-fluid top-buffer-tiny">
+                <div class="row text-align-center top-buffer-medium-small">
+                    <div class="col-xs-3 col-md-2 center-block"></div>
+                    <div class="col-xs-3 col-md-1 center-block">
+                        <div class="form-group">
+                            <input type="submit" value="Add New Sensors" id="submitAddSensors" class="btn btn-dark">
+                        </div>
+                        <div class="form-group">
+                            <input id="ip_no" type="text" value="" name="ip_no">
+                        </div>
+                    </div>
+                    <div class="col-xs-5 col-md-3 center-block">
+                        <div class="form-group">
+                            <label for="ip_wp" class="col-md-5 control-label">Workplace</label>
+                            <select id="ip_wp" name="ip_wp" class="selectpicker" data-show-subtext="true">
+                                <option data-subtext='Saege'>2</option>
+                                <option data-subtext='NC-Maschine'>3</option>
+                                <option data-subtext='Montage'>4</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ip_st" class="col-md-5 control-label">Sensor Type</label>
+                            <select id="ip_st" name="ip_st" class="selectpicker" data-show-subtext="true">
+                                <option data-subtext='Temperature Sensor'>0</option>
+                                <option data-subtext='Noise Sensor'>1</option>
+                                <option data-subtext='Vibration Sensor'>2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-md-2 center-block">
+                        <div class="form-group">
+                            <label for="ip_minv" class="col-md-4 control-label">Minimum Value</label>
+                            <input id="ip_minv" type="text" value="10" name="ip_minv">
+                        </div>
+                        <div class="form-group">
+                            <label for="ip_maxv" class="col-md-4 control-label">Maximum Value</label>
+                            <input id="ip_maxv" type="text" value="20" name="ip_maxv">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-md-2 center-block">
+                        <div class="form-group">
+                            <label for="ip_frq" class="col-md-4 control-label">Sending Frequency</label>
+                            <input id="ip_frq" type="text" value="100" name="ip_frq">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-md-1 center-block"></div>
+                </div>
+            </div>
+
+            <div class="container top-buffer-small fixed-height-and-overflow-auto">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th>Workplace</th>
+                            <th>Sensor Type</th>
+                            <th>Value Range</th>
+                            <th>Sending Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(workplace <- sensorOverview.sensorConfig) {
+                        @for(sensorType <- workplace.sensorTypes) {
+                            @for(sensor <- sensorType.sensors) {
+                                <tr>
+                                    <td>@workplace.name</td>
+                                    <td>@sensorType.name</td>
+                                    <td>@sensor.min_value - @sensor.max_value [unit]</td>
+                                    <td>@sensor.durationBetweenMeasurementsInMs ms</td>
+                                </tr>
+                            }
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+            <!-- Bootstrap core JavaScript
+================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <script>window.jQuery || document.write('<script src="@routes.Assets.versioned("javascripts/lib/jquery/jquery.js")"><\/script>')</script>
+            <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+            <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/i18n/defaults-en_US.min.js"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/bootstrap/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/bs-touchspin/jquery.bootstrap-touchspin.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/bootstrap/ie10-viewport-bug-workaround.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/bootstrap/dataTables.bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/highstock/highstock.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/lib/jquery/jquery.dataTables.min.js")"></script>j
+        <script src="@routes.Assets.versioned("javascripts/charts.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/table.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/sql.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/chartupdater.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/datagen.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/navbar.js")"></script>
+    </body>
+</html>

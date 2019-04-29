@@ -1,0 +1,181 @@
+{
+  "config_name": "Initial Config",
+  "defective_good_config": [
+	{
+	  "attribute_type" : 0,
+	  "attribute" : "GOODS_RECEIVED.SUPPLIER",
+	  "value" : "9",
+	  "relation" : "eq"
+	},
+	{
+	  "attribute_type" : 1,
+	  "attribute" : "2;0;avg",
+	  "value" : "18",
+	  "relation" : "gt"
+	}
+  ],
+  "sensor_config": [
+	{
+	  "workplace_id": 2,
+	  "workplace_name": "Cutting Machine",
+	  "sensor_types": [
+		{
+		  "sensor_type_id": 0,
+		  "sensor_type_name": "Temperature",
+		  "sensors": [
+			{
+			  "min_value": 10,
+			  "max_value": 20,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 10,
+			  "max_value": 20,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 1,
+		  "sensor_type_name": "Noise",
+		  "sensors": [
+			{
+			  "min_value": 30,
+			  "max_value": 40,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 35,
+			  "max_value": 45,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 2,
+		  "sensor_type_name": "Vibration",
+		  "sensors": [
+			{
+			  "min_value": 50,
+			  "max_value": 60,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 55,
+			  "max_value": 65,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "workplace_id": 3,
+	  "workplace_name": "NC Machine",
+	  "sensor_types": [
+		{
+		  "sensor_type_id": 0,
+		  "sensor_type_name": "Temperature",
+		  "sensors": [
+			{
+			  "min_value": 5,
+			  "max_value": 15,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 5,
+			  "max_value": 15,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 1,
+		  "sensor_type_name": "Noise",
+		  "sensors": [
+			{
+			  "min_value": 25,
+			  "max_value": 35,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 30,
+			  "max_value": 40,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 2,
+		  "sensor_type_name": "Vibration",
+		  "sensors": [
+			{
+			  "min_value": 45,
+			  "max_value": 55,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 50,
+			  "max_value": 60,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "workplace_id": 4,
+	  "workplace_name": "Assembly",
+	  "sensor_types": [
+		{
+		  "sensor_type_id": 0,
+		  "sensor_type_name": "Temperature",
+		  "sensors": [
+			{
+			  "min_value": 10,
+			  "max_value": 20,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 10,
+			  "max_value": 20,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 1,
+		  "sensor_type_name": "Noise",
+		  "sensors": [
+			{
+			  "min_value": 30,
+			  "max_value": 40,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 35,
+			  "max_value": 45,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		},
+		{
+		  "sensor_type_id": 2,
+		  "sensor_type_name": "Vibration",
+		  "sensors": [
+			{
+			  "min_value": 50,
+			  "max_value": 60,
+			  "duration_between_measurements_in_ms": 100
+			},
+			{
+			  "min_value": 55,
+			  "max_value": 65,
+			  "duration_between_measurements_in_ms": 100
+			}
+		  ]
+		}
+	  ]
+	}
+  ]
+}

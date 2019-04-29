@@ -1,2 +1,1 @@
-# DemoDataIntegration
- Combining Business and Sensor Data (to be published)
+This is work in progress. Confidential data removed as well as included libraries (for licensing reasons). However, core structure and core parts are still included.
